@@ -1,0 +1,18 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Establece el nivel de log de Serenity a INFO -->
+    <logger name="net.thucydides" level="INFO" />
+
+    <!-- Establece el nivel de log de Cucumber a INFO -->
+    <logger name="io.cucumber" level="INFO" />
+
+    <!-- Configura el root logger a INFO para filtrar DEBUG -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>
