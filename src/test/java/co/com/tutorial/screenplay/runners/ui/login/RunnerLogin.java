@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
                 "co.com.tutorial.screenplay.hooks"},
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         plugin = {"pretty"},
-        tags = "@FeatureName:Login"
+        tags = "@FeatureName:LoginOrange"
 )
 
 public class RunnerLogin {
