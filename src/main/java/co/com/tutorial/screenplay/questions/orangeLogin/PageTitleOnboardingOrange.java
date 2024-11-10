@@ -1,4 +1,4 @@
-package co.com.tutorial.screenplay.questions;
+package co.com.tutorial.screenplay.questions.orangeLogin;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;

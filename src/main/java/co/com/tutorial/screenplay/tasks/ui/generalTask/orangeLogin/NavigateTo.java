@@ -1,4 +1,4 @@
-package co.com.tutorial.screenplay.tasks.ui.generalTask;
+package co.com.tutorial.screenplay.tasks.ui.generalTask.orangeLogin;
 
 import co.com.tutorial.screenplay.utils.KeyToRemember;
 import net.serenitybdd.screenplay.Actor;

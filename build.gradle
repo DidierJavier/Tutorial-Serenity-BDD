@@ -80,10 +80,9 @@ serenity {
 gradle.startParameter.continueOnFailure = true
 
 test {
+    dependsOn clearReports
     useJUnitPlatform()
-    testLogging.showStandardStreams = true
     systemProperty 'environment', System.properties['environment']
     systemProperty "file.encoding", "utf-8"
 }
-
 test.finalizedBy(aggregate)

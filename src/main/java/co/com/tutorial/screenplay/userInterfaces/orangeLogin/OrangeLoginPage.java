@@ -1,9 +1,12 @@
-package co.com.tutorial.screenplay.userInterfaces;
+package co.com.tutorial.screenplay.userInterfaces.orangeLogin;
 
 import net.serenitybdd.screenplay.targets.Target;
 import org.openqa.selenium.By;
 
 public class OrangeLoginPage {
+
+    private OrangeLoginPage() {
+    }
 
     public static final Target USER_NAME = Target
             .the("Campo para ingresar el nombre usuario para iniciar sesion")
