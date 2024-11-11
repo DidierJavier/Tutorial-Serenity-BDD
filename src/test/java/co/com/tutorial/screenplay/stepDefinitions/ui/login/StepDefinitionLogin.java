@@ -1,5 +1,6 @@
 package co.com.tutorial.screenplay.stepDefinitions.ui.login;
 
+import co.com.tutorial.screenplay.exceptions.TestFailure;
 import co.com.tutorial.screenplay.questions.orangeLogin.PageTitleOnboardingOrange;
 import co.com.tutorial.screenplay.tasks.ui.generalTask.orangeLogin.NavigateAndLoginOn;
 import co.com.tutorial.screenplay.tasks.ui.generalTask.orangeLogin.NavigateTo;
@@ -25,14 +26,10 @@ public class StepDefinitionLogin {
 
     @Entonces("el {actor} deberia ver la pagina principal del sistema")
     public void elUsuarioDeberiaVerLaPaginaPrincipalDelSistema(Actor userActor) {
-       userActor.
-               should(
-                       seeThat("El titulo de la pagina", PageTitleOnboardingOrange.displayed(), Matchers.equalTo("OrangeHRM"))
-               );
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        userActor.should(
+                seeThat(
+                        "El titulo de la pagina",
+                        PageTitleOnboardingOrange.displayed(), Matchers.equalTo("orangeHRM"))
+                        .orComplainWith(TestFailure.class, "El titulo de la pagina es diferente a OrangeHRM"));
     }
 }
