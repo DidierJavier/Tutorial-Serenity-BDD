@@ -29,7 +29,7 @@ public class StepDefinitionLogin {
         userActor.should(
                 seeThat(
                         "El titulo de la pagina",
-                        PageTitleOnboardingOrange.displayed(), Matchers.equalTo("orangeHRM"))
+                        PageTitleOnboardingOrange.displayed(), Matchers.equalTo("OrangeHRM"))
                         .orComplainWith(TestFailure.class, "El titulo de la pagina es diferente a OrangeHRM"));
     }
 }
