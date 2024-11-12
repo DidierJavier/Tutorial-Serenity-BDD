@@ -13,9 +13,9 @@ Característica: Login de usuario en OrangeHRM
     Cuando el usuario ingresa con credenciales validas
     Entonces el usuario deberia ver la pagina principal del sistema
 
-#  Escenario: Login fallido con contraseña incorrecta
-#  Cuando el usuario ingresa el nombre de usuario correcto y la contrasena incorrecta
-#  Entonces el usuario no puede acceder a la pagina de OrangeHRM
+  Escenario: Login fallido con contraseña incorrecta
+    Cuando el usuario ingresa el nombre de usuario correcto y la contrasena incorrecta
+    Entonces el usuario no puede acceder a la pagina de OrangeHRM
 #
 #  Escenario: Login fallido con nombre de usuario incorrecto
 #    Cuando el usuario ingresa el nombre de usuario incorrecto y la contrasena correcta

@@ -1,4 +1,4 @@
-defaultTasks 'clean', 'test', 'aggregate'
+defaultTasks 'clean', 'test'
 
 repositories {
     mavenCentral()
@@ -85,4 +85,4 @@ test {
     systemProperty 'environment', System.properties['environment']
     systemProperty "file.encoding", "utf-8"
 }
-test.finalizedBy(aggregate)
+test.finalizedBy(reports)
