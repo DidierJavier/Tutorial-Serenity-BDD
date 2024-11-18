@@ -16,4 +16,6 @@ public class OrangeLoginPage {
             .located(By.cssSelector("input[placeholder='Password']"));
     public static final Target LOGIN_BUTTON = Target.the("Boton para inicar sesion")
             .located(By.cssSelector("button[type='submit']"));
+    public static final Target INVALID_CREDENTIALS = Target.the("Boton para inicar sesion")
+            .located(By.cssSelector(".oxd-alert-content--error > p"));
 }
