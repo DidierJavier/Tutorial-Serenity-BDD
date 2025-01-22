@@ -12,8 +12,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath "net.serenity-bdd:serenity-gradle-plugin:4.2.6"
-        classpath "net.serenity-bdd:serenity-single-page-report:4.2.6"
+        classpath "net.serenity-bdd:serenity-gradle-plugin:4.2.12"
+        classpath "net.serenity-bdd:serenity-single-page-report:4.2.12"
     }
 }
 
@@ -23,17 +23,19 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
 
-sourceCompatibility = 17
-targetCompatibility = 17
+tasks.withType(JavaCompile).configureEach {
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+}
 
 ext {
     log4jVersion = '2.22.0'
-    serenityVersion = '4.2.6'
+    serenityVersion = '4.2.12'
     restAssuredVersion = '5.0.1'
     junitVersion = '5.9.3'
     logbackVersion = '1.5.6'
     lombokVersion = '1.18.24'
-    javaFakerVersion = '1.0.2'
+    dataFakerVersion = '2.4.2'
     commonsConfigVersion = '2.11.0'
     mongoDriverVersion = '3.12.11'
     zip4jVersion = '2.11.5'
@@ -55,7 +57,7 @@ dependencies {
             "org.junit.jupiter:junit-jupiter-engine:${junitVersion}",
             "org.projectlombok:lombok:${lombokVersion}",
             "ch.qos.logback:logback-classic:${logbackVersion}",
-            "com.github.javafaker:javafaker:${javaFakerVersion}",
+            "net.datafaker:datafaker:${dataFakerVersion}",
             "org.apache.commons:commons-configuration2:${commonsConfigVersion}",
             "org.apache.logging.log4j:log4j-core:${log4jVersion}",
             "org.mongodb:mongo-java-driver:${mongoDriverVersion}",

@@ -1,7 +1,7 @@
 package co.com.tutorial.screenplay.tasks.ui.generalTask.orangeLogin;
 
 import co.com.tutorial.screenplay.utils.KeyToRemember;
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 
