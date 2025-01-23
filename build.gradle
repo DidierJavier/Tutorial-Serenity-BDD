@@ -12,8 +12,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath "net.serenity-bdd:serenity-gradle-plugin:4.2.12"
-        classpath "net.serenity-bdd:serenity-single-page-report:4.2.12"
+        classpath "net.serenity-bdd:serenity-gradle-plugin:4.2.13"
+        classpath "net.serenity-bdd:serenity-single-page-report:4.2.13"
     }
 }
 
@@ -30,7 +30,7 @@ tasks.withType(JavaCompile).configureEach {
 
 ext {
     log4jVersion = '2.22.0'
-    serenityVersion = '4.2.12'
+    serenityVersion = '4.2.13'
     restAssuredVersion = '5.0.1'
     junitVersion = '5.9.3'
     logbackVersion = '1.5.6'

@@ -8,6 +8,8 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Switch;
 import net.serenitybdd.screenplay.ensure.Ensure;
 
+import java.time.Duration;
+
 
 public class LoginOnOrange implements Task {
     private final String userName;
@@ -25,7 +27,7 @@ public class LoginOnOrange implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         Switch.toDefaultContext().performAs(actor);
-        Ensure.that(OrangeLoginPage.USER_NAME.resolveFor(actor).isVisible())
+        Ensure.that(OrangeLoginPage.USER_NAME.waitingForNoMoreThan(Duration.ofSeconds(10)).resolveFor(actor).isVisible())
                 .isTrue()
                 .orElseThrow(new TestFailure(
                         "El campo para ingresar el nombre del usuario en la pagina de OrangeHRM no es visible"))
