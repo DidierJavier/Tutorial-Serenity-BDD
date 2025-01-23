@@ -10,10 +10,10 @@ public class OrangeLoginPage {
 
     public static final Target USER_NAME = Target
             .the("Campo para ingresar el nombre usuario para iniciar sesion")
-            .located(By.cssSelector("input[placeholder='Username']"));
+            .located(By.cssSelector("div:nth-child(2) > div > div:nth-child(2) > input"));
     public static final Target USER_PASSWORD = Target
             .the("Campo para ingresar el Password para iniciar sesion")
-            .located(By.cssSelector("input[placeholder='Password']"));
+            .located(By.cssSelector("div:nth-child(3) > div > div:nth-child(2) > input"));
     public static final Target LOGIN_BUTTON = Target.the("Boton para inicar sesion")
             .located(By.cssSelector("button[type='submit']"));
     public static final Target INVALID_CREDENTIALS = Target.the("Boton para inicar sesion")
