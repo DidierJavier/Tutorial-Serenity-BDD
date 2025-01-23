@@ -76,6 +76,8 @@ dependencies {
 }
 
 serenity {
+    testRoot = "co.com.tutorial.screenplay.runners"
+    requirementsBaseDir = "src/test/resources/features"
     reports = ["single-page-html"]
 }
 
