@@ -1,3 +1,14 @@
-# Default ignored files
-/shelf/
-/workspace.xml
+.idea/
+.vscode
+/.gradle/
+*.bin
+*.lock
+*.probe
+*.idx
+/build/
+/target/
+/out/
+/bin/
+/history/
+userDataDir
+userDataDirZip.zip

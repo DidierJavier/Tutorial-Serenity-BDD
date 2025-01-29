@@ -3,8 +3,11 @@ package co.com.tutorial.screenplay.tasks.ui.generalTask.orangeLogin;
 import co.com.tutorial.screenplay.utils.KeyToRemember;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NavigateAndLoginOn implements Task {
+    private static final Logger logger = LoggerFactory.getLogger(NavigateTo.class);
 
     public static NavigateAndLoginOn orangeHRM() {
         return new NavigateAndLoginOn();
@@ -17,5 +20,7 @@ public class NavigateAndLoginOn implements Task {
                         actor.recall(KeyToRemember.ORANGE_USER_NAME.name()),
                         actor.recall(KeyToRemember.ORANGE_USER_PASSWORD.name()))
                 .performAs(actor);
+        if(logger.isInfoEnabled())
+            logger.info("User access correctly in Orange page");
     }
 }
