@@ -49,8 +49,9 @@ public class StepDefinitionHttpRequest {
                                                     pageNumber,
                                             validatableResponseAssertion -> validatableResponse
                                                     .statusCode(200)
-                                                    .body("data.id", contains(Constants.ReqresInService
-                                                            .ID_USERS_PER_PAGE.toArray()))
+                                                    .body("data.id", equalTo(Constants.ReqresInService
+                                                            .ID_USERS_PER_PAGE))
+                                                    .log().all()
                                     )
                             );
                         }
