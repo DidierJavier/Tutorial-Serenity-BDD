@@ -41,8 +41,11 @@ public class UserInterfaceHook {
     public void setEnvironmentVariablesService() {
         String pathUserList = EnvironmentSpecificConfiguration.from(environmentVariables)
                 .getProperty("path.user.list");
+        String pathCreateUser = EnvironmentSpecificConfiguration.from(environmentVariables)
+                .getProperty("path.create.user");
         theActorInTheSpotlight().remember(KeyToRemember.REQRES_IN_URL_BASE.name(), reqresInUrlBase);
         theActorInTheSpotlight().remember(KeyToRemember.PATH_USER_LIST.name(), pathUserList);
+        theActorInTheSpotlight().remember(KeyToRemember.PATH_CREATE_USER.name(), pathCreateUser);
     }
     //endregion @FeatureName:HttpRequests
     //endregion Services

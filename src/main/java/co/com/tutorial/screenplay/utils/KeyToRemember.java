@@ -9,6 +9,8 @@ public enum KeyToRemember {
 
     //region service
     REQRES_IN_URL_BASE,
-    PATH_USER_LIST
+    PATH_USER_LIST,
+    PATH_CREATE_USER,
+    DATA_TO_CREATE_USER
     //endregion service
 }

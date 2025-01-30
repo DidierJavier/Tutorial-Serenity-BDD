@@ -9,14 +9,18 @@ Característica: Probar requests en Reqres
   #When: get, post, put, delete
   #Then: Validate status code, extract response, extract headers cookies & response body...
 
-  Esquema del escenario: Obtener usuarios de forma exitosa
-    Dado que el tester cuenta con el recurso para hacer la peticion http
-    Cuando el tester envia la peticion para obtener los usuarios de la pagina <numero de pagina>
-    Entonces se obtiene la lista de usuarios de la pagina <numero de pagina> correctamente
+#  Esquema del escenario: Obtener usuarios de forma exitosa
+#    Dado que el tester cuenta con el recurso para hacer la peticion http
+#    Cuando el tester envia la peticion para obtener los usuarios de la pagina <numero de pagina>
+#    Entonces se obtiene la lista de usuarios de la pagina <numero de pagina> correctamente
+#
+#    Ejemplos:
+#      | numero de pagina |
+#      | "1"              |
+#      | "2"              |
+#      | "3"              |
 
-    Ejemplos:
-      | numero de pagina |
-      | "1"              |
-      | "2"              |
-      | "3"              |
-
+  Escenario: Crear un nuevo usuario exitosamente
+    Dado que tengo un usuario con datos validos para crear
+    Cuando envio la peticion para crear un usuario
+    Entonces el usuario se crea correctamente
