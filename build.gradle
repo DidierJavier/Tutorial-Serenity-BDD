@@ -44,6 +44,7 @@ ext {
     apachePoiVersion = '5.2.5'
     dom4jVersion = '2.1.4'
     apacheXmlBeans = '5.2.0'
+    jsonVersion = '20250107'
 }
 dependencies {
     implementation "net.serenity-bdd:serenity-core:${serenityVersion}",
@@ -69,7 +70,8 @@ dependencies {
             "org.apache.poi:poi-scratchpad:${apachePoiVersion}",
             "org.apache.poi:poi-ooxml-lite:${apachePoiVersion}",
             "org.apache.xmlbeans:xmlbeans:${apacheXmlBeans}",
-            "org.dom4j:dom4j:${dom4jVersion}"
+            "org.dom4j:dom4j:${dom4jVersion}",
+            "org.json:json:${jsonVersion}"
     testImplementation 'org.junit.vintage:junit-vintage-engine:5.11.1'
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
