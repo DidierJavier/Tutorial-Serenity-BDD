@@ -17,6 +17,7 @@ import java.util.Map;
 
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeThatResponse;
+import static org.hamcrest.Matchers.equalTo;
 
 public class StepDefinitionWaysToCreateBodyRequest {
     private static final Logger logger = LoggerFactory.getLogger(StepDefinitionHttpRequest.class);
@@ -62,6 +63,17 @@ public class StepDefinitionWaysToCreateBodyRequest {
         theActorInTheSpotlight().should(seeThatResponse("Se ha actualizado el usuario correctamente",
                         validatableResponse -> validatableResponse
                                 .statusCode(201)
+                                .body("id", equalTo(51))
+                                .body("products[0].id", equalTo(1))
+                                .body("products[0].title", equalTo("Essence Mascara Lash Princess"))
+                                .body("products[0].thumbnail", equalTo("https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png"))
+                                .body("products[0].quantity", equalTo(2))
+
+                                .body("products[1].id", equalTo(2))
+                                .body("products[1].quantity", equalTo(1))
+
+                                .body("products[2].id", equalTo(3))
+                                .body("products[2].quantity", equalTo(4))
                                 .log().all()));
     }
 }
