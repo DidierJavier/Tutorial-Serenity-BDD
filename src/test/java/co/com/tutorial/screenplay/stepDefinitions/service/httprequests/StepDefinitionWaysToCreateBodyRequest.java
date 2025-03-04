@@ -1,5 +1,7 @@
 package co.com.tutorial.screenplay.stepDefinitions.service.httprequests;
 
+import co.com.tutorial.screenplay.models.service.waysToCreateBodyRequest.DataProductsUser;
+import co.com.tutorial.screenplay.models.service.waysToCreateBodyRequest.Product;
 import co.com.tutorial.screenplay.utils.KeyToRemember;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
@@ -13,10 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeThatResponse;
@@ -85,8 +85,8 @@ public class StepDefinitionWaysToCreateBodyRequest {
     //endregion Realizar peticion Http con body request usando Hashmap
 
     //region Realizar peticion Http con body request usando org.json
-    @Dado("que tengo un usuario con datos validos para crear usando org.json")
-    public void queTengoUnUsuarioConDatosValidosParaCrearUsandoOrgJson() {
+    @Dado("que tengo un usuario con con productos en el carrito de compras usando org.json")
+    public void queTengoUnUsuarioConConProductosEnElCarritoDeComprasUsandoOrgJson() {
         // Crear el JSONObject principal
         JSONObject dataProductsUser = new JSONObject();
 
@@ -123,21 +123,20 @@ public class StepDefinitionWaysToCreateBodyRequest {
         theActorInTheSpotlight().remember(KeyToRemember.DATA_PRODUCTS_USER.name(), dataProductsUser); //Asumiendo que keytoremember es un string.
     }
 
-    @Cuando("envio la peticion para crear un usuario usando org.json")
-    public void envioLaPeticionParaCrearUnUsuarioUsandoOrgJson() {
+    @Cuando("el usuario hace la peticion de agregar los productos al carrito de compras usando org.json")
+    public void elUsuarioHaceLaPeticionDeAgregarLosProductosAlCarritoDeComprasUsandoOrgJson() {
         JSONObject dataProductsUser = theActorInTheSpotlight().recall(KeyToRemember.DATA_PRODUCTS_USER.name());
         logger.info(dataProductsUser.toString());
-        String jsonBody = dataProductsUser.toString();
         Post.to("/carts/add")
                 .with(requestSpecification -> requestSpecification
                         .contentType(ContentType.JSON)
-                        .body(jsonBody)
+                        .body(dataProductsUser.toString())
                         .log().all())
                 .performAs(theActorInTheSpotlight());
     }
 
-    @Entonces("el usuario se crea correctamente usando org.json")
-    public void elUsuarioSeCreaCorrectamenteUsandoOrgJson() {
+    @Entonces("los productos se agregan correctamente al carrito usando org.json")
+    public void losProductosSeAgreganCorrectamenteAlCarritoUsandoOrgJson() {
         theActorInTheSpotlight().should(seeThatResponse("Se ha actualizado el usuario correctamente",
                 validatableResponse -> {
                     Response response = validatableResponse.extract().response();
@@ -173,4 +172,40 @@ public class StepDefinitionWaysToCreateBodyRequest {
                 }));
     }
     //endregion Realizar peticion Http con body request usando org.json
+
+    //region Realizar peticion Http con body request usando POJO class
+    @Dado("que tengo un usuario con productos en el carrito de compras usando POJO class")
+    public void queTengoUnUsuarioConProductosEnElCarritoDeComprasUsandoPOJOClass() {
+        // Crear la lista de productos
+        List<Product> products = Arrays.asList(
+                new Product(1, 2),
+                new Product(2, 1),
+                new Product(3, 4)
+        );
+        // Crear el objeto DataProductsUser
+        DataProductsUser dataProductsUser = new DataProductsUser(5, products);
+
+        // Imprimir el objeto DataProductsUser
+        logger.info(dataProductsUser.toString());
+
+        theActorInTheSpotlight().whoCan(CallAnApi.at("https://dummyjson.com"));
+        theActorInTheSpotlight().remember(KeyToRemember.DATA_PRODUCTS_USER.name(), dataProductsUser);
+    }
+
+    @Cuando("el usuario hace la peticion de agregar los productos al carrito de compras usando POJO class")
+    public void elUsuarioHaceLaPeticionDeAgregarLosProductosAlCarritoDeComprasUsandoPOJOClass() {
+        DataProductsUser dataProductsUser = theActorInTheSpotlight().recall(KeyToRemember.DATA_PRODUCTS_USER.name());
+        Post.to("/carts/add")
+                .with(requestSpecification -> requestSpecification
+                        .contentType(ContentType.JSON)
+                        .body(dataProductsUser)
+                        .log().all())
+                .performAs(theActorInTheSpotlight());
+    }
+
+    @Entonces("los productos se agregan correctamente al carrito usando POJO class")
+    public void losProductosSeAgreganCorrectamenteAlCarritoUsandoPOJOClass() {
+
+    }
+    //endregion Realizar peticion Http con body request usando POJO class
 }
