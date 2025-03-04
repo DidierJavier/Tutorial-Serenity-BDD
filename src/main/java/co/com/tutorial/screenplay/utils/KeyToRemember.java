@@ -7,12 +7,16 @@ public enum KeyToRemember {
     ORANGE_USER_PASSWORD,
     //endregion UI
 
-    //region service
+    //region service regresin
     REQRES_IN_URL_BASE,
     PATH_USER_LIST,
     PATH_CREATE_USER,
     DATA_TO_CREATE_USER,
     USER_ID,
-    DATA_TO_UPDATE_USER
-    //endregion service
+    DATA_TO_UPDATE_USER,
+    //endregion service regresin
+
+    //region service dummyjson
+    DATA_PRODUCTS_USER
+    //endregion service dummyjson
 }
