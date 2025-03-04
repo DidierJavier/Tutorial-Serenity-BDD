@@ -202,10 +202,5 @@ public class StepDefinitionWaysToCreateBodyRequest {
                         .log().all())
                 .performAs(theActorInTheSpotlight());
     }
-
-    @Entonces("los productos se agregan correctamente al carrito usando POJO class")
-    public void losProductosSeAgreganCorrectamenteAlCarritoUsandoPOJOClass() {
-
-    }
     //endregion Realizar peticion Http con body request usando POJO class
 }
