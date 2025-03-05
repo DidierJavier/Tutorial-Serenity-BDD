@@ -48,5 +48,20 @@ public class UserInterfaceHook {
         theActorInTheSpotlight().remember(KeyToRemember.PATH_CREATE_USER.name(), pathCreateUser);
     }
     //endregion @FeatureName:HttpRequests
+
+    //region @FeatureName:WaysToCreateBodyRequest
+    @Before("@FeatureName:WaysToCreateBodyRequest")
+    public void setEnvironmentVariablesWaysToCreateBodyRequest() {
+        String pathDataProductsUserJson = EnvironmentSpecificConfiguration.from(environmentVariables)
+                .getProperty("path.dataProductsUser.json");
+
+        String urlDataProductsUserJson = EnvironmentSpecificConfiguration.from(environmentVariables)
+                .getProperty("url.dataProductsUser.json");
+
+        theActorInTheSpotlight().remember(KeyToRemember.URL_DATA_PRODUCTS_USER_JSON.name(), urlDataProductsUserJson);
+        theActorInTheSpotlight().remember(KeyToRemember.PATH_DATA_PRODUCTS_USER_JSON.name(), pathDataProductsUserJson);
+    }
+    //endregion @FeatureName:WaysToCreateBodyRequest
+
     //endregion Services
 }

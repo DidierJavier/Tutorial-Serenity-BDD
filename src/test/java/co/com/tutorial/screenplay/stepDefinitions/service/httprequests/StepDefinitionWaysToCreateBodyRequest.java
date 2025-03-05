@@ -13,9 +13,13 @@ import net.serenitybdd.screenplay.rest.interactions.Post;
 import org.hamcrest.Matchers;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.*;
 
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
@@ -203,4 +207,41 @@ public class StepDefinitionWaysToCreateBodyRequest {
                 .performAs(theActorInTheSpotlight());
     }
     //endregion Realizar peticion Http con body request usando POJO class
+
+    //region Realizar peticion Http con body request usando external json file
+    @Dado("que tengo un usuario con productos en el carrito de compras usando json file")
+    public void queTengoUnUsuarioConProductosEnElCarritoDeComprasUsandoJsonFile() {
+        String filePathDataProductsUser = theActorInTheSpotlight().recall(KeyToRemember.URL_DATA_PRODUCTS_USER_JSON.name());
+        // Resolver las variables en la ruta
+        String resolvedFilePath = filePathDataProductsUser
+                .replace("${user.dir}", System.getProperty("user.dir"))
+                .replace("${file.separator}", File.separator);
+        // Crear el objeto File con la ruta resuelta
+        File dataProductsUserFile = new File(resolvedFilePath);
+
+        try {
+            FileReader fileReader = new FileReader(dataProductsUserFile);
+            JSONTokener jsonTokener = new JSONTokener(fileReader);
+            JSONObject dataProductsUser = new JSONObject(jsonTokener);
+            // Imprimir el objeto DataProductsUser
+            logger.info(dataProductsUser.toString());
+
+            theActorInTheSpotlight().whoCan(CallAnApi.at("https://dummyjson.com"));
+            theActorInTheSpotlight().remember(KeyToRemember.DATA_PRODUCTS_USER.name(), dataProductsUser);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Cuando("el usuario hace la peticion de agregar los productos al carrito de compras usando json file")
+    public void elUsuarioHaceLaPeticionDeAgregarLosProductosAlCarritoDeComprasUsandoJsonFile() {
+        JSONObject dataProductsUser = theActorInTheSpotlight().recall(KeyToRemember.DATA_PRODUCTS_USER.name());
+        Post.to("/carts/add")
+                .with(requestSpecification -> requestSpecification
+                        .contentType(ContentType.JSON)
+                        .body(dataProductsUser.toString())
+                        .log().all())
+                .performAs(theActorInTheSpotlight());
+    }
+    //endregion Realizar peticion Http con body request usando external json file
 }

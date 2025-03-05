@@ -17,6 +17,8 @@ public enum KeyToRemember {
     //endregion service regresin
 
     //region service dummyjson
-    DATA_PRODUCTS_USER
+    DATA_PRODUCTS_USER,
+    URL_DATA_PRODUCTS_USER_JSON,
+    PATH_DATA_PRODUCTS_USER_JSON
     //endregion service dummyjson
 }
