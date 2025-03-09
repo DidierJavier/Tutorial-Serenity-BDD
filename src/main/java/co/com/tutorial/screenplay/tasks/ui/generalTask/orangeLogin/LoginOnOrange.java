@@ -3,6 +3,7 @@ package co.com.tutorial.screenplay.tasks.ui.generalTask.orangeLogin;
 import co.com.tutorial.screenplay.exceptions.TestFailure;
 import co.com.tutorial.screenplay.interactions.orangeLogin.interactionsManager.OrangeLogin;
 import co.com.tutorial.screenplay.userInterfaces.orangeLogin.OrangeLoginPage;
+import co.com.tutorial.screenplay.utils.ui.WaitUtils;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Switch;
@@ -34,6 +35,29 @@ public class LoginOnOrange implements Task {
                 .performAs(actor);
         OrangeLogin.enterUserName(userName).performAs(actor);
         OrangeLogin.enterUserPassword(userPassword).performAs(actor);
+
+        /*WaitUntil.the(OrangeLoginPage.LOGIN_BUTTON, WebElementStateMatchers.isVisible())
+                .forNoMoreThan(Duration.ofSeconds(30)).performAs(actor);
+
+        WaitUntil.the(OrangeLoginPage.LOGIN_BUTTON, WebElementStateMatchers.containsOnlyText("DIDI"))
+                .performAs(actor);
+
+        Ensure.that(Visibility.of(OrangeLoginPage.LOGIN_BUTTON.waitingForNoMoreThan(Duration.ofSeconds(30)))).isTrue()
+                .orElseThrow(new TestFailure("BAD")).performAs(actor);
+
+        Ensure.that(Presence.of(OrangeLoginPage.LOGIN_BUTTON.waitingForNoMoreThan(Duration.ofSeconds(10)))).isTrue()
+                .performAs(actor);
+
+        Ensure.that(Text.of(OrangeLoginPage.LOGIN_BUTTON.resolveFor(actor).getText())).isEqualTo("Hola");
+
+        FluentWait<WebDriver> wait = new FluentWait<>(BrowseTheWeb.as(actor).getDriver())
+                .withTimeout(Duration.ofSeconds(45))
+                .pollingEvery(Duration.ofSeconds(2))
+                .ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.visibilityOf(OrangeLoginPage.LOGIN_BUTTON.resolveFor(actor)));*/
+
+        WaitUtils.waitForVisibilityOf(actor, OrangeLoginPage.LOGIN_BUTTON, 10, 500);
+
         OrangeLogin.selectTheLoginButton(OrangeLoginPage.LOGIN_BUTTON).performAs(actor);
     }
 }
