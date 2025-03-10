@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NavigateAndLoginOn implements Task {
-    private static final Logger logger = LoggerFactory.getLogger(NavigateTo.class);
+    private static final Logger logger = LoggerFactory.getLogger(NavigateAndLoginOn.class);
 
     public static NavigateAndLoginOn orangeHRM() {
         return new NavigateAndLoginOn();
