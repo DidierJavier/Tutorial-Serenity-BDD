@@ -13,9 +13,9 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeThatResponse;
 import static org.hamcrest.Matchers.*;
 
-public class StepDefinitionPathAndQueryParameters {
+public class StepDefinitionPathAndQueryParamsCookiesAndHeaders {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StepDefinitionPathAndQueryParameters.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StepDefinitionPathAndQueryParamsCookiesAndHeaders.class);
 
     @Dado("que el tester cuenta con el recurso para hacer la peticion http con parametros")
     public void queElTesterCuentaConElRecursoParaHacerLaPeticionHttpConParametros() {

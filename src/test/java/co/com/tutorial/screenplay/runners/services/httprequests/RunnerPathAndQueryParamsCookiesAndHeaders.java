@@ -6,12 +6,12 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = "src/test/resources/features/service/httprequests/PathAndQueryParameters.feature",
+        features = "src/test/resources/features/service/httprequests/PathAndQueryParamsCookiesAndHeaders.feature",
         glue = {"co.com.tutorial.screenplay.stepDefinitions",
                 "co.com.tutorial.screenplay.hooks"},
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         plugin = {"pretty"},
-        tags = "@FeatureName:PathAndQueryParameters"
+        tags = "@FeatureName:PathAndQueryParamsCookiesAndHeaders"
 )
-public class RunnerPathAndQueryParameters {
+public class RunnerPathAndQueryParamsCookiesAndHeaders {
 }

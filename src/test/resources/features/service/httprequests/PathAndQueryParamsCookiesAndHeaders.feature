@@ -1,5 +1,5 @@
 #language: es
-@FeatureName:PathAndQueryParameters
+@FeatureName:PathAndQueryParamsCookiesAndHeaders
 Característica: Probar requests en Reqres
   Como tester
   Quiero aprender a probar peticiones http automatizadas
