@@ -8,7 +8,6 @@ import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
 import io.restassured.http.ContentType;
-import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import net.serenitybdd.screenplay.rest.interactions.Delete;
 import net.serenitybdd.screenplay.rest.interactions.Post;
 import net.serenitybdd.screenplay.rest.interactions.Put;
@@ -28,8 +27,8 @@ public class StepDefinitionHttpRequest {
     //region Obtener usuarios de forma exitosa
     @Dado("que el tester cuenta con el recurso para hacer la peticion http")
     public void queElTesterCuentaConElRecursoParaHacerLaPeticionHttp() {
-        theActorInTheSpotlight()
-                .whoCan(CallAnApi.at(theActorInTheSpotlight().recall(KeyToRemember.REQRES_IN_URL_BASE.name())));
+        logger.info("URL Base se llama desde el hook");
+        logger.info(theActorInTheSpotlight().recall(KeyToRemember.REQRES_IN_URL_BASE.name()));
     }
 
     @Cuando("el tester envia la peticion para obtener los usuarios de la pagina {businessParameter}")

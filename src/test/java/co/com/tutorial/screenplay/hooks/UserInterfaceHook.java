@@ -3,6 +3,7 @@ package co.com.tutorial.screenplay.hooks;
 import co.com.tutorial.screenplay.utils.KeyToRemember;
 import io.cucumber.java.Before;
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
+import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import net.thucydides.model.environment.SystemEnvironmentVariables;
 import net.thucydides.model.util.EnvironmentVariables;
 
@@ -43,7 +44,6 @@ public class UserInterfaceHook {
                 .getProperty("path.user.list");
         String pathCreateUser = EnvironmentSpecificConfiguration.from(environmentVariables)
                 .getProperty("path.create.user");
-        theActorInTheSpotlight().remember(KeyToRemember.REQRES_IN_URL_BASE.name(), reqresInUrlBase);
         theActorInTheSpotlight().remember(KeyToRemember.PATH_USER_LIST.name(), pathUserList);
         theActorInTheSpotlight().remember(KeyToRemember.PATH_CREATE_USER.name(), pathCreateUser);
     }
@@ -63,5 +63,15 @@ public class UserInterfaceHook {
     }
     //endregion @FeatureName:WaysToCreateBodyRequest
 
+    //region @CallApiRegresIn
+    @Before("@CallApiRegresIn")
+    public void callApiRegresIn() {
+        theActorInTheSpotlight().remember(KeyToRemember.REQRES_IN_URL_BASE.name(), reqresInUrlBase);
+        theActorInTheSpotlight()
+                .whoCan(CallAnApi.at(theActorInTheSpotlight().recall(KeyToRemember.REQRES_IN_URL_BASE.name())));
+    }
+    //endregion @CallApiRegresIn
+
     //endregion Services
+
 }
