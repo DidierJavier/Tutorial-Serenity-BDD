@@ -19,3 +19,14 @@ Característica: Probar requests en Reqres
       | path       | page | id |
       | /api/users | 2    | 5  |
       | /api/users | 1    | 3  |
+
+  Escenario: Obtener cookies de un sitio web
+    Dado que el tester tiene el recurso para realizar la peticion http
+    Cuando el tester envia la peticion para obtener las cookies del sitio
+    Entonces el tester obtiene las cookies correctamente
+
+  Escenario: Validar Headers de la respuesta de una peticion HTTP
+    Dado que el tester tiene el recurso para realizar la peticion http
+    Cuando el tester envia la peticion para obtener los headers del sitio
+    Entonces el tester valida que los headers sean correctos
+
