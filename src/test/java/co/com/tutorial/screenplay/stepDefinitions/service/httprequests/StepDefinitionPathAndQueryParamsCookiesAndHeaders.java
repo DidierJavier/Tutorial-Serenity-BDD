@@ -131,16 +131,14 @@ public class StepDefinitionPathAndQueryParamsCookiesAndHeaders {
     public void elTesterValidaQueLosHeadersSeanCorrectos(Actor actor) {
         actor.should(seeThatResponse(
                         "Se han obtenido las cookies del sitio web",
-                        validatableResponse -> {
-                            validatableResponse
-                                    .statusCode(200)
-                                    .header("Content-Type", "text/html; charset=ISO-8859-1")
-                                    .and()
-                                    .header("Content-Encoding", "gzip")
-                                    .and()
-                                    .header("Server", "gws")
-                                    .log().all();
-                        }
+                        validatableResponse -> validatableResponse
+                                .statusCode(200)
+                                .header("Content-Type", "text/html; charset=ISO-8859-1")
+                                .and()
+                                .header("Content-Encoding", "gzip")
+                                .and()
+                                .header("Server", "gws")
+                                .log().all()
                 )
         );
     }
