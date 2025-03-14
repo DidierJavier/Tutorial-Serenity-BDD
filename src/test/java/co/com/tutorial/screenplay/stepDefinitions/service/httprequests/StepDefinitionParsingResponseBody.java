@@ -12,8 +12,13 @@ import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import net.serenitybdd.screenplay.rest.interactions.Get;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeThatResponse;
 import static org.hamcrest.Matchers.equalTo;
@@ -65,4 +70,44 @@ public class StepDefinitionParsingResponseBody {
         LOGGER.info("The language was = {}", languageName);
     }
     //endregion Verificar la respuesta a una peticion con Response de rest-azure
+
+    //region Verificar la respuesta a una peticion con Response y JSONObject class
+    @Entonces("el tester observa que los valores esperados son iguales a los del Response usando JSONObject class")
+    public void elTesterObservaQueLosValoresEsperadosSonIgualesALosDelResponseUsandoJSONObjectClass() {
+        List<String> expectedLanguages = List.of("fr", "de", "en");
+        JSONObject jsonObject = new JSONObject(SerenityRest.lastResponse().getBody().asString());
+
+        // Check if "names" exists and is an array
+        if (!jsonObject.has("names") || jsonObject.isNull("names")) {
+            throw new RuntimeException("Error: 'names' field is missing or null.");
+        }
+
+        JSONArray namesArray = jsonObject.getJSONArray("names");
+
+        // List to store language names
+        List<String> languagesResponse = new ArrayList<>();
+
+        // Loop through the array to get languages
+        for (int i = 0; i < namesArray.length(); i++) {
+            JSONObject nameEntry = namesArray.getJSONObject(i); // ✅ Correct usage of index
+            if (!nameEntry.has("language") || nameEntry.isNull("language")) {
+                continue; // Skip if language key is missing
+            }
+            JSONObject languageObject = nameEntry.getJSONObject("language"); // ✅ Correct extraction
+
+            if (!languageObject.has("name") || languageObject.isNull("name")) {
+                continue; // Skip if name key is missing
+            }
+
+            String languageName = languageObject.getString("name"); // ✅ Now it's correctly extracted
+            languagesResponse.add(languageName);
+        }
+
+        // Print languages for debugging
+        MatcherAssert.assertThat(
+                "La lista de lenguajes esperados son iguales a la lista de lenguajes de la respuesta",
+                languagesResponse, Matchers.is(expectedLanguages));
+        LOGGER.info("The language was iqual = {}", languagesResponse);
+    }
+    //endregion Verificar la respuesta a una peticion con Response y JSONObject class
 }
