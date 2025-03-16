@@ -9,12 +9,10 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import net.serenitybdd.screenplay.rest.interactions.Get;
-import net.serenitybdd.screenplay.rest.questions.ResponseConsequence;
 
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeThatResponse;
 import static org.hamcrest.Matchers.equalTo;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class StepDefinitionJsonAndXmlSchemaSerializationAndDeserialization {
 
@@ -35,18 +33,6 @@ public class StepDefinitionJsonAndXmlSchemaSerializationAndDeserialization {
 
     @Entonces("al comparar la respuesta de la peticion con el Json schema es correcta")
     public void alCompararLaRespuestaDeLaPeticionConElJsonSchemaEsCorrecta() {
-        theActorInTheSpotlight().should(ResponseConsequence.seeThatResponse( // Use ResponseConsequence for better readability
-                        "Los datos obtenidos son correctos",
-                        validatableResponse -> validatableResponse
-                                .statusCode(200)
-                                .header("Content-Type", "application/json; charset=utf-8")
-                                .body("names[1].language.name", equalTo("de"))
-                                .and()
-                                .assertThat().body(matchesJsonSchemaInClasspath("file.json"))
-                                .log().all())
-                .orComplainWith(TestFailure.class, "Error en las aserciones")
-        );
-
         theActorInTheSpotlight().should(seeThatResponse(
                 "Los datos obtenidos son correctos",
                 validatableResponse -> validatableResponse
