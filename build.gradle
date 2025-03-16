@@ -49,6 +49,7 @@ ext {
 dependencies {
     implementation "net.serenity-bdd:serenity-core:${serenityVersion}",
             "io.rest-assured:rest-assured:${restAssuredVersion}",
+            "io.rest-assured:json-schema-validator:${restAssuredVersion}",
             "net.serenity-bdd:serenity-junit5:${serenityVersion}",
             "net.serenity-bdd:serenity-cucumber:${serenityVersion}",
             "net.serenity-bdd:serenity-screenplay:${serenityVersion}",
