@@ -180,7 +180,7 @@ public class StepDefinitionParsingXMLResponseUploadAndDownloadFile {
     @Entonces("el tester observa que el archivo se descarga de forma correcta")
     public void elTesterObservaQueElArchivoSeDescargaDeFormaCorrecta() {
         final String DOWNLOAD_URL = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-        final String DOWNLOAD_PATH = "C:/Tutorial-Serenity-BDD/src/test/resources/service.files.download/downloaded_dummy.pdf";
+        final String DOWNLOAD_PATH = "src/test/resources/service.files.download/downloaded_dummy.pdf";
 
         Response response = SerenityRest.given()
                 .when()
@@ -190,8 +190,8 @@ public class StepDefinitionParsingXMLResponseUploadAndDownloadFile {
                 .extract().response();
 
         // Save the file
-        try (FileOutputStream fos = new FileOutputStream(new File(DOWNLOAD_PATH))) {
-            fos.write(response.asByteArray());
+        try (FileOutputStream fileOutputStream = new FileOutputStream(DOWNLOAD_PATH)) {
+            fileOutputStream.write(response.asByteArray());
         } catch (IOException e) {
             e.printStackTrace();
         }
