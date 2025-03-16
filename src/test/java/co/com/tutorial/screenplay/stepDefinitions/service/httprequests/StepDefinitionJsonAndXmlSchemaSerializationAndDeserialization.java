@@ -5,6 +5,7 @@ import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
 import io.restassured.http.ContentType;
+import io.restassured.matcher.RestAssuredMatchers;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
@@ -47,4 +48,36 @@ public class StepDefinitionJsonAndXmlSchemaSerializationAndDeserialization {
         );
     }
     //endregion Validacion con Json schema
+
+    //region Validacion de respuesta en XSL con XSD schema
+    @Dado("que el {actor} cuenta con el recurso para hacer la peticion http y el archivo xsd schema")
+    public void queElTesterCuentaConElRecursoParaHacerLaPeticionHttpYElArchivoXsdSchema(Actor tester) {
+        tester.whoCan(CallAnApi.at("https://mocktarget.apigee.net"));
+    }
+
+    @Cuando("el {actor} envia la peticion para comparar la respuesta con xsd schema")
+    public void elTesterEnviaLaPeticionParaCompararLaRespuestaConXsdSchema(Actor tester) {
+        Get.resource("/xml")
+                .with(requestSpecification -> requestSpecification
+                        .contentType(ContentType.XML)
+                        .log().all())
+                .performAs(tester);
+    }
+
+    @Entonces("al comparar la respuesta XSL de la peticion con el XSD schema es correcta")
+    public void alCompararLaRespuestaXSLDeLaPeticionConElXSDSchemaEsCorrecta() {
+        theActorInTheSpotlight().should(seeThatResponse(
+                "Los datos obtenidos son correctos",
+                validatableResponse -> validatableResponse
+                        .log().all()
+                        .statusCode(200)
+                        .header("Content-Type", "application/xml; charset=utf-8").and()
+                        .and()
+                        .assertThat().body(RestAssuredMatchers.matchesXsdInClasspath(
+                                "service/files/schema/xmlSchemaValidator.xsd"))
+                        .log().all())
+                .orComplainWith(TestFailure.class, "Error en las aserciones")
+        );
+    }
+    //endregion Validacion de respuesta en XSL con XSD schema
 }
