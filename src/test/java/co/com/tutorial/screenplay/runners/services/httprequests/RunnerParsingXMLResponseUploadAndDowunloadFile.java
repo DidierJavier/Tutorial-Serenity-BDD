@@ -6,12 +6,12 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = "src/test/resources/features/service/httprequests/ParsingXMLResponse.feature",
+        features = "src/test/resources/features/service/httprequests/ParsingXMLResponseUploadAndDownloadFile.feature",
         glue = {"co.com.tutorial.screenplay.stepDefinitions",
                 "co.com.tutorial.screenplay.hooks"},
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         plugin = {"pretty"},
         tags = "@FeatureName:ParsingXMLResponse"
 )
-public class RunnerParsingXMLResponse {
+public class RunnerParsingXMLResponseUploadAndDowunloadFile {
 }
