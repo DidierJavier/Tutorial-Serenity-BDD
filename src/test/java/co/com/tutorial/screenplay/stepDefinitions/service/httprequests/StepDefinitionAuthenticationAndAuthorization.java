@@ -14,8 +14,8 @@ import static org.hamcrest.Matchers.equalTo;
 public class StepDefinitionAuthenticationAndAuthorization {
 
     //region Autenticacion basica
-    @Dado("que el {actor} cuenta con el recurso para realizar una autenticacion basica")
-    public void queElTesterCuentaConElRecursoParaRealizarUnaAutenticacionBasica(Actor tester) {
+    @Dado("que el {actor} cuenta con el recurso para autenticarse")
+    public void queElTesterCuentaConElRecursoParaAutenticarse(Actor tester) {
         tester.whoCan(CallAnApi.at("https://postman-echo.com"));
     }
 
@@ -39,4 +39,28 @@ public class StepDefinitionAuthenticationAndAuthorization {
         ));
     }
     //endregion Autenticacion basica
+
+    //region Digest authentication
+    @Cuando("el {actor} realiza la peticion de Digest authentication")
+    public void elTesterRealizaLaPeticionDeDigestAuthentication(Actor tester) {
+        Get.resource("/basic-auth")
+                .with(requestSpecification -> requestSpecification
+                        .contentType(ContentType.JSON)
+                        .auth().digest("postman", "password")
+                        .log().all())
+                .performAs(tester);
+    }
+    //endregion Digest authentication
+
+    //region Preemptive authentication
+    @Cuando("el {actor} realiza la peticion de Preemptive authentication")
+    public void elTesterRealizaLaPeticionDePreemptiveAuthentication(Actor tester) {
+        Get.resource("/basic-auth")
+                .with(requestSpecification -> requestSpecification
+                        .contentType(ContentType.JSON)
+                        .auth().preemptive().basic("postman", "password")
+                        .log().all())
+                .performAs(tester);
+    }
+    //endregion Preemptive authentication
 }
