@@ -76,7 +76,7 @@ public class StepDefinitionAuthenticationAndAuthorization {
 
     @Cuando("el {actor} realiza la peticion de Bearer Token authentication")
     public void elTesterRealizaLaPeticionDeBearerTokenAuthentication(Actor tester) {
-        String bearerTokenMyGitHub = "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";//Token vence cada 30 días
+        String bearerTokenMyGitHub = "TOKEN_DE_GIT_HUB_VENCE_CADA_30_DIAS";//Token vence cada 30 días
         Get.resource("/user")
                 .with(requestSpecification -> requestSpecification
                         .contentType(ContentType.JSON)
